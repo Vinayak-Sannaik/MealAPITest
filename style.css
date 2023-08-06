@@ -1,0 +1,227 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: 'Merriweather', serif;
+    font-weight: 500;
+}
+body{
+    background-color: rgb(255, 165, 0);
+    position: relative;
+}
+header{
+    width: 100%;
+    height: 10vh;
+    padding: 10px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(44, 9, 9, 0.2); 
+}
+.heading{
+    font-size:2rem;
+}
+.search-bar{
+    display: flex;
+    position: relative;
+}
+form{
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+} 
+form input{
+    padding: 10px 50px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background-color:whitesmoke
+}
+.fa-magnifying-glass{
+    margin-top: 20px;
+    margin-left: -35px;
+    position: absolute;
+}
+.favorite-section a{
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: rgb(2, 11, 24);
+}
+.items-count{
+   position: absolute;
+   color: rgb(202, 226, 232);
+   margin-top: -10px;
+}
+.item-container{
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px 20px 20px    ;
+    display: grid;
+    grid-gap: 25px;
+    /* grid-template-rows: repeat(4, 280px); */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.item-container-fav{
+    width: 100%;
+    height: 100%;
+    padding: 20px 20px 20px 20px    ;
+    display: grid;
+    grid-gap: 25px;
+    /* grid-template-rows: repeat(4, 280px); */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.item{
+    width: 300px;
+    background-color: rgb(44, 9, 9, 0.2); 
+    border-radius: 15px;
+}
+.item img{
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
+}
+
+.view-more-btn{
+    all:unset;
+    cursor: pointer;
+}
+.flex-container{
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+.add-favorite-btn{
+    all:unset;
+    background-color: brown;
+    color: aliceblue;
+    font-size: .8rem;
+    cursor: pointer; 
+    border-radius: 15px;
+    padding: 5px;
+}
+.add-favorite-btn:hover{
+    background-color: rgb(104, 136, 184);
+}
+
+.more-details{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgb(233, 161, 27);
+    width: 60%;
+    height: 80%;
+    border-radius: 25px;
+    padding: 10px;
+    overflow-y: scroll;
+    display: none;
+}
+
+.more-details-show{
+    display: block;
+}
+
+.not-found{
+    font-size: 2rem;
+    color: rgb(255, 255, 255);
+    margin-top: 100px;
+    text-align: center;
+}
+
+.close-btn{
+    background-color: burlywood;
+    font-size: .5rem;
+    padding: 10px;
+    border-radius: 50%;
+}
+.more-details-title{
+    font-size: 1.5rem;
+    text-align: center;
+}
+.more-details-img{
+    margin-top: 10px ;
+    margin-left: -3px;
+    width: 250px;
+    height: 250x;
+    border-radius: 17px;
+}
+.more-details-content{
+    padding: 10px;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-left: 20px;
+    text-align: center;
+    width: 90%;
+    
+}
+
+
+
+
+@media (width < 350px){
+    .heading{
+        font-size: 0.8rem;
+        margin-left: 10px;
+        margin-right: 4px;
+    }
+    form input{
+        padding: 6px 15px;
+        font-size: .5rem;
+    }
+    .favorite-section a{
+        text-decoration: none;
+        color: whitesmoke;
+        font-size: 0.5rem ;
+        margin-right: 15px;
+    }
+    .item{
+        width: 280px;
+        background-color: rgb(44, 9, 9, 0.2); 
+        border-radius: 15px;
+    }
+    .item img{
+        width: 280px;
+        height: 200px;
+        border-radius: 15px;
+    }
+    .close-btn{
+        background-color: burlywood;
+        font-size: .2rem;
+        padding: 5px;
+        border-radius: 50%;
+    }
+    .more-details-title{
+        font-size: 0.5rem;
+        text-align: center;
+    }
+    .more-details-img{
+        margin-top: 5px ;
+        margin-left: 10px;
+        width: 100px;
+        height: 100x;
+        border-radius: 17px;
+    }
+    .more-details{
+        width: 90%;
+        height: 70%;
+    }
+    .more-details-content{
+        padding: 0px;
+        font-size: 0.7rem;
+        margin-top: 5px;
+        margin-left: 5px;
+        text-align: center;
+        width: 95%;
+        height: 95%;
+    }
+    .fa-magnifying-glass{
+        margin-top: 14px;
+        margin-left: -20px;
+    }
+    .items-count{
+        margin-top: -1px;
+     }
+}
