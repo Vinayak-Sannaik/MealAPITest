@@ -25,7 +25,8 @@ Contributions are welcome! If you have any suggestions or find any issues, feel 
 
 ## Q : We want result 🤦‍♀️?
 
-![image](https://github.com/Vinayak-Sannaik/MealAPITest/assets/112576218/24c513b5-22dd-43a0-80e5-d8e2e35d607f)
-Check Live - https://vinayak-sannaik.github.io/MealAPITest/
+![image](https://github.com/Vinayak-Sannaik/MealAPITest/assets/112576218/6a972516-5eb8-4be1-ae93-d6b20ea36aa7)
+
+## Check Live - https://vinayak-sannaik.github.io/MealAPITest/
 
 
