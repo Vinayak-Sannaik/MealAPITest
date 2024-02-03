@@ -9,12 +9,15 @@ const favoriteMeals = document.querySelector(".item-container-fav");
 const favoriteCount = document.querySelector(".items-count");
 
 // Event listeners
-let searchQuery = "";
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  searchQuery = e.target.querySelector("input").value;
-//   console.log(searchQuery);
-  fetchAPI();
+  const searchQuery = e.target.querySelector("input").value.trim();
+  fetchAPI(searchQuery);
+});
+
+searchIcon.addEventListener("click", () => {
+  const searchQuery = searchForm.querySelector("input").value.trim();
+  fetchAPI(searchQuery);
 });
 
 mealCloseButton.addEventListener("click", () => {
@@ -22,7 +25,7 @@ mealCloseButton.addEventListener("click", () => {
 });
 
 // Function to fetch for inputs
-async function fetchAPI() {
+async function fetchAPI(searchQuery) {
   const baseURL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchQuery}`;
   try {
     const response = await fetch(baseURL);
@@ -32,7 +35,6 @@ async function fetchAPI() {
       );
     }
     const data = await response.json();
-    //   console.log(data);
     generateHTML(data.meals);
   } catch (error) {
     console.error("Error fetching categories:", error);
@@ -90,17 +92,18 @@ mealList.addEventListener("click", (e) => {
 });
 
 function mealRecipeModel(meal) {
-  // console.log(meal);
+ 
   meal = meal[0];
   let html = `
-        <div class="more-details-title"><h2>${meal.strMeal}</h2></div>
-        <div class="more-details-title"><h4>Category : ${meal.strCategory}</h4></div>
+        <div class="more-details-title"><h3>${meal.strMeal}</h3></div>
+        <div class="more-details-title"><h6>Category : ${meal.strCategory}</h6></div>
           <img class="more-details-img" src="${meal.strMealThumb}" alt="img">
-          <p class="more-details-content">
+          <p class = "meal-instruction">
             ${meal.strInstructions}
           </p>
-        
         `;
+        console.log(meal.strInstructions);
+
   mealDetailsContent.innerHTML = html;
   mealDetailsContent.parentElement.classList.add("more-details-show");
 }
@@ -123,7 +126,6 @@ function addToFavorites(mealId) {
   }
 }
 
-
 // Fetch meal id after clicking add to favorite button
 mealList.addEventListener("click", (e) => {
   e.preventDefault();
@@ -134,46 +136,6 @@ mealList.addEventListener("click", (e) => {
     }
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // allLocalStorageData.forEach((item)=>{
 // let favHTML = '';
@@ -192,7 +154,7 @@ mealList.addEventListener("click", (e) => {
 //                         Remove
 //                     </button>
 //                 </div>
-//         </div> 
+//         </div>
 //         `;
 // favoriteMeals.innerHTML = favHTML
 
