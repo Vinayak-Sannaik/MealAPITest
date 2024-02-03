@@ -1,79 +1,61 @@
-const favoriteMeals = document.querySelector(".item-container-fav");
+const favoriteMealsContainer = document.querySelector(".item-container-fav");
 
-// Function to get all key-value pairs from local storage
-function getAllLocalStorageItems() {
-  const allItems = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    const value = localStorage.getItem(key);
-    allItems.push({ key, value }); // Parse the value if needed
-  }
-  return allItems;
-}
+// Fetch all the meals from local storage
+const arrayString = localStorage.getItem("favorites");
+const favoriteMealsList = JSON.parse(arrayString) || [];
 
-const allLocalStorageData = getAllLocalStorageItems();
-const values = allLocalStorageData.map((item) => item.value);
-const jsonValue = values[1];
-const parsedArray = JSON.parse(jsonValue);
-// Convert each value in the array to integers
-const integersArray = parsedArray.map((str) => parseInt(str));
-console.log("Parsed Array of Integers:", integersArray);
-
-
+fetchMeals();
 async function fetchMeals() {
-    for (let i = 0; i < integersArray.length; i++) {
-        try {
-            const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${integersArray[i]}`);
-            const data = await response.json();
-            Model(data.meals, i); 
-        } catch (error) {
-            console.error(`Error fetching meal with intValue ${integersArray[i]}:`, error);
-        }
+  for (let i = 0; i < favoriteMealsList.length; i++) {
+    try {
+      const response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${favoriteMealsList[i]}`
+      );
+      const data = await response.json();
+      Model(data.meals, i);
+    } catch (error) {
+      console.error(
+        `Error fetching meal with intValue ${favoriteMealsList[i]}:`,
+        error
+      );
     }
+  }
 }
 
-
-// Function to remove a meal from favorites and local storage
-function removeFavoriteMeal(index) {
-    const favoriteMealsContainer = document.querySelector('.item-container-fav');
-    
-    // Get the removed meal's element
-    const removedMeal = favoriteMealsContainer.getElementsByClassName('item')[index];
-    
-    // If the meal exists in the UI, remove it
-        if (removedMeal) {
-            favoriteMealsContainer.removeChild(removedMeal);
-    
-            const allLocalStorageData = getAllLocalStorageItems();
-            const keyToRemove = allLocalStorageData[index].key;
-            
-            console.log("Removing key:", keyToRemove); // Check the key before removing
-            localStorage.removeItem(keyToRemove);
-        
-            console.log("LocalStorage after removal:", localStorage); // Check the local storage content
-        }
-}
-
-// Function to handle "Remove" button clicks
-function handleRemoveButtonClick(index) {
-    removeFavoriteMeal(index);
-    alert('Removed from favorites');
-}
-
-function Model(mealData,index) {
-    mealData.forEach(meal => {
-        const mealName = meal.strMeal;
-        favoriteMeals.innerHTML += `<div class="item">
+function Model(mealData, index) {
+  mealData.forEach((meal) => {
+    const mealName = meal.strMeal;
+    favoriteMealsContainer.innerHTML += `
+    <div class="item">
         <button class="view-more-btn">
           <img src="${meal.strMealThumb}" alt="item1" />
         </button>
         <div class="flex-container">
-          <h3 class="title">${meal.strMeal}</h3>
-          <button class="add-favorite-btn" onclick="handleRemoveButtonClick(${index})">
+        <h3 class="title">${meal.strMeal}</h3>
+        <button class="add-favorite-btn" onclick="handleRemoveButtonClick(${index})">
                 Remove
-            </button>
-        </div>`;
-    });
+        </button>
+    </div>
+    </div>`;
+  });
 }
 
-fetchMeals();
+function removeFavoriteMeal(index) {
+  // Remove the meal from local storage
+  const keyToRemove = favoriteMealsList[index];
+  favoriteMealsList.splice(index, 1); // Remove the meal from the list
+  localStorage.setItem("favorites", JSON.stringify(favoriteMealsList)); // Update local storage
+  console.log("Removed key:", keyToRemove);
+
+  // Remove the meal from the UI
+  const removedMeal = favoriteMealsContainer.getElementsByClassName("item")[index];
+  if (removedMeal) {
+    removedMeal.remove();
+  }
+}
+
+function handleRemoveButtonClick(index) {
+  console.log("index", index);
+  removeFavoriteMeal(index);
+  alert("Removed from favorites");
+}
